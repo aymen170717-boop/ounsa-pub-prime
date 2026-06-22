@@ -12,7 +12,18 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/tasks'
+import { Route as AuthenticatedSuppliersRouteImport } from './routes/_authenticated/suppliers'
+import { Route as AuthenticatedStockRouteImport } from './routes/_authenticated/stock'
+import { Route as AuthenticatedQuotesRouteImport } from './routes/_authenticated/quotes'
+import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticated/products'
+import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
+import { Route as AuthenticatedOrdersRouteImport } from './routes/_authenticated/orders'
+import { Route as AuthenticatedInvoicesRouteImport } from './routes/_authenticated/invoices'
+import { Route as AuthenticatedExpensesRouteImport } from './routes/_authenticated/expenses'
+import { Route as AuthenticatedEmployeesRouteImport } from './routes/_authenticated/employees'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedClientsRouteImport } from './routes/_authenticated/clients'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -28,40 +39,167 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSuppliersRoute = AuthenticatedSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStockRoute = AuthenticatedStockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQuotesRoute = AuthenticatedQuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProductsRoute = AuthenticatedProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedOrdersRoute = AuthenticatedOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedInvoicesRoute = AuthenticatedInvoicesRouteImport.update({
+  id: '/invoices',
+  path: '/invoices',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEmployeesRoute = AuthenticatedEmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClientsRoute = AuthenticatedClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/clients': typeof AuthenticatedClientsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/employees': typeof AuthenticatedEmployeesRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/orders': typeof AuthenticatedOrdersRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/products': typeof AuthenticatedProductsRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/stock': typeof AuthenticatedStockRoute
+  '/suppliers': typeof AuthenticatedSuppliersRoute
+  '/tasks': typeof AuthenticatedTasksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/clients': typeof AuthenticatedClientsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/employees': typeof AuthenticatedEmployeesRoute
+  '/expenses': typeof AuthenticatedExpensesRoute
+  '/invoices': typeof AuthenticatedInvoicesRoute
+  '/orders': typeof AuthenticatedOrdersRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/products': typeof AuthenticatedProductsRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
+  '/stock': typeof AuthenticatedStockRoute
+  '/suppliers': typeof AuthenticatedSuppliersRoute
+  '/tasks': typeof AuthenticatedTasksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/clients': typeof AuthenticatedClientsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/employees': typeof AuthenticatedEmployeesRoute
+  '/_authenticated/expenses': typeof AuthenticatedExpensesRoute
+  '/_authenticated/invoices': typeof AuthenticatedInvoicesRoute
+  '/_authenticated/orders': typeof AuthenticatedOrdersRoute
+  '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
+  '/_authenticated/products': typeof AuthenticatedProductsRoute
+  '/_authenticated/quotes': typeof AuthenticatedQuotesRoute
+  '/_authenticated/stock': typeof AuthenticatedStockRoute
+  '/_authenticated/suppliers': typeof AuthenticatedSuppliersRoute
+  '/_authenticated/tasks': typeof AuthenticatedTasksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/clients'
+    | '/dashboard'
+    | '/employees'
+    | '/expenses'
+    | '/invoices'
+    | '/orders'
+    | '/payments'
+    | '/products'
+    | '/quotes'
+    | '/stock'
+    | '/suppliers'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard'
+  to:
+    | '/'
+    | '/auth'
+    | '/clients'
+    | '/dashboard'
+    | '/employees'
+    | '/expenses'
+    | '/invoices'
+    | '/orders'
+    | '/payments'
+    | '/products'
+    | '/quotes'
+    | '/stock'
+    | '/suppliers'
+    | '/tasks'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/clients'
     | '/_authenticated/dashboard'
+    | '/_authenticated/employees'
+    | '/_authenticated/expenses'
+    | '/_authenticated/invoices'
+    | '/_authenticated/orders'
+    | '/_authenticated/payments'
+    | '/_authenticated/products'
+    | '/_authenticated/quotes'
+    | '/_authenticated/stock'
+    | '/_authenticated/suppliers'
+    | '/_authenticated/tasks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,6 +231,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/tasks': {
+      id: '/_authenticated/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof AuthenticatedTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/suppliers': {
+      id: '/_authenticated/suppliers'
+      path: '/suppliers'
+      fullPath: '/suppliers'
+      preLoaderRoute: typeof AuthenticatedSuppliersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/stock': {
+      id: '/_authenticated/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof AuthenticatedStockRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/quotes': {
+      id: '/_authenticated/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof AuthenticatedQuotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/products': {
+      id: '/_authenticated/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof AuthenticatedProductsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/orders': {
+      id: '/_authenticated/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof AuthenticatedOrdersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/invoices': {
+      id: '/_authenticated/invoices'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof AuthenticatedInvoicesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/expenses': {
+      id: '/_authenticated/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof AuthenticatedExpensesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/employees': {
+      id: '/_authenticated/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof AuthenticatedEmployeesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -100,15 +308,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/clients': {
+      id: '/_authenticated/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof AuthenticatedClientsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedClientsRoute: typeof AuthenticatedClientsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEmployeesRoute: typeof AuthenticatedEmployeesRoute
+  AuthenticatedExpensesRoute: typeof AuthenticatedExpensesRoute
+  AuthenticatedInvoicesRoute: typeof AuthenticatedInvoicesRoute
+  AuthenticatedOrdersRoute: typeof AuthenticatedOrdersRoute
+  AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
+  AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
+  AuthenticatedQuotesRoute: typeof AuthenticatedQuotesRoute
+  AuthenticatedStockRoute: typeof AuthenticatedStockRoute
+  AuthenticatedSuppliersRoute: typeof AuthenticatedSuppliersRoute
+  AuthenticatedTasksRoute: typeof AuthenticatedTasksRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedClientsRoute: AuthenticatedClientsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEmployeesRoute: AuthenticatedEmployeesRoute,
+  AuthenticatedExpensesRoute: AuthenticatedExpensesRoute,
+  AuthenticatedInvoicesRoute: AuthenticatedInvoicesRoute,
+  AuthenticatedOrdersRoute: AuthenticatedOrdersRoute,
+  AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
+  AuthenticatedProductsRoute: AuthenticatedProductsRoute,
+  AuthenticatedQuotesRoute: AuthenticatedQuotesRoute,
+  AuthenticatedStockRoute: AuthenticatedStockRoute,
+  AuthenticatedSuppliersRoute: AuthenticatedSuppliersRoute,
+  AuthenticatedTasksRoute: AuthenticatedTasksRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
