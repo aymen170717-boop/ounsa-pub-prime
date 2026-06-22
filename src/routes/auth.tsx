@@ -54,8 +54,20 @@ function AuthPage() {
   };
 
   const onGoogle = async () => {
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/dashboard" });
-    if (result.error) toast.error(result.error.message ?? "Erreur Google");
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        toast.error(result.error.message ?? "Erreur Google");
+        return;
+      }
+      if (result.redirected) return;
+      toast.success(t("welcome_back"));
+      navigate({ to: "/dashboard", replace: true });
+    } catch (e: any) {
+      toast.error(e?.message ?? "Erreur Google");
+    }
   };
 
   return (
