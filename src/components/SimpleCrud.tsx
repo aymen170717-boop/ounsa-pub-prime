@@ -42,20 +42,27 @@ export function SimpleCrud({ table, columns, fields, title, defaultSort = "creat
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Record<string, unknown> | null>(null);
 
+  const sb = supabase as unknown as {
+    from: (t: string) => {
+      select: (q: string) => { order: (c: string, o: { ascending: boolean }) => { limit: (n: number) => Promise<{ data: Record<string, unknown>[] | null; error: { message: string } | null }> } };
+      upsert: (r: Record<string, unknown>) => Promise<{ error: { message: string } | null }>;
+      delete: () => { eq: (c: string, v: string) => Promise<{ error: { message: string } | null }> };
+    };
+  };
+
   const { data, isLoading, refetch } = useQuery({
     queryKey: [table],
     queryFn: async () => {
-      const { data, error } = await (supabase.from(table as never) as never)
-        .select("*").order(defaultSort, { ascending: false }).limit(500);
-      if (error) throw error;
+      const { data, error } = await sb.from(table).select("*").order(defaultSort, { ascending: false }).limit(500);
+      if (error) throw new Error(error.message);
       return (data ?? []) as Record<string, unknown>[];
     },
   });
 
   const upsert = useMutation({
     mutationFn: async (row: Record<string, unknown>) => {
-      const { error } = await (supabase.from(table as never) as never).upsert(row);
-      if (error) throw error;
+      const { error } = await sb.from(table).upsert(row);
+      if (error) throw new Error(error.message);
     },
     onSuccess: () => { qc.invalidateQueries({ queryKey: [table] }); toast.success("Enregistré"); setOpen(false); setEditing(null); },
     onError: (e: Error) => toast.error(e.message),
@@ -63,12 +70,13 @@ export function SimpleCrud({ table, columns, fields, title, defaultSort = "creat
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await (supabase.from(table as never) as never).delete().eq("id", id);
-      if (error) throw error;
+      const { error } = await sb.from(table).delete().eq("id", id);
+      if (error) throw new Error(error.message);
     },
     onSuccess: () => { qc.invalidateQueries({ queryKey: [table] }); toast.success("Supprimé"); },
     onError: (e: Error) => toast.error(e.message),
   });
+
 
   const filtered = (data ?? []).filter(r =>
     !search || JSON.stringify(r).toLowerCase().includes(search.toLowerCase())
