@@ -3,6 +3,7 @@ import {
   Outlet, createRootRouteWithContext, useRouter, HeadContent, Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -78,7 +79,11 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="fr">
       <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
+      <body>
+        {children}
+        <Scripts />
+        <Analytics />
+      </body>
     </html>
   );
 }
